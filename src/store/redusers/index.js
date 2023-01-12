@@ -1,7 +1,14 @@
-import { combineReducers } from "redux";
-import { orderReduser } from "./orderReduser";
+import {applyMiddleware, combineReducers, createStore} from "redux";
+import orderReducer from "./orderReduser";
+import createSagaMiddleware from 'redux-saga'
+import {rootWatcher} from "../../saga";
 
+const sagaMiddleware = createSagaMiddleware()
 
-export const rootReduser = combineReducers({
-    order: orderReduser
+const rootReducer = combineReducers({
+    orderReducer
 })
+
+export const store = createStore(rootReducer, applyMiddleware(sagaMiddleware))
+
+sagaMiddleware.run(rootWatcher)

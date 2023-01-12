@@ -1,9 +1,9 @@
 // @flow
 import * as React from "react";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import { Table } from "antd";
 
-export const OrderTable = ({ orders }) => {
+export const OrderTable = () => {
   const columns = [
     {
       title: "Номер заявки",
@@ -26,14 +26,7 @@ export const OrderTable = ({ orders }) => {
       dataIndex: "lngTo",
     },
   ];
+  const orders = useSelector((state) => state.orderReducer.orders);
 
   return <Table columns={columns} dataSource={orders} />;
 };
-
-const orderStateToProps = (state) => {
-  return {
-    orders: state.orders,
-  };
-};
-
-export default connect(orderStateToProps)(OrderTable);

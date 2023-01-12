@@ -1,30 +1,25 @@
-import {
-    FETCH_ORDERS,
-    FETCH_ORDERS_ERROR,
-    FETCH_ORDERS_SUCCESS
-} from '../action-creators/order'
-
-const initialState = {
-    orders: [],
-    loading: false,
-    error: null
+const defaultState = {
+    orders: []
 }
 
-export const orderReduser = (state = initialState, action) => {
+export const SET_ORDERS = "SET_ORDERS"
+export const FETCH_ORDERS = "FETCH_ORDERS"
+
+export default function orderReducer(state = defaultState, action) {
     switch (action.type) {
-        case FETCH_ORDERS:
+        case SET_ORDERS:
             return {
-                loading: true, error: null, orders: []
-            }
-            case FETCH_ORDERS_SUCCESS:
-                return {
-                    loading: false, error: null, orders: action.payload
-                }
-                case FETCH_ORDERS_ERROR:
-                    return {
-                        loading: false, error: action.payload, orders: []
-                    }
-                    default:
-                        return state
+                ...state, orders: action.payload
+            };
+        default:
+            return state;
     }
 }
+
+export const setOrders = payload => ({
+    type: SET_ORDERS,
+    payload
+})
+export const fetchOrders = () => ({
+    type: FETCH_ORDERS
+})

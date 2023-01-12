@@ -1,4 +1,14 @@
-const data = [{
+import {put, takeEvery, call} from "redux-saga/effects"
+import {FETCH_ORDERS, setOrders} from "../store/redusers/orderReduser";
+
+const delay = (ms) => new Promise(res => setTimeout(res, ms));
+
+// const fetchOrdersFromApi = () => fetch('https://...')
+
+function* fetchOrderWorker() {
+    // const data = yield call(fetchOrdersFromApi)
+    // const json = yield call(() => new Promise(res => res(data.json())))
+    const json = [{
         key: "1",
         orderNumber: "№1",
         latFrom: "59.84660399",
@@ -39,28 +49,10 @@ const data = [{
         lngTo: "30.29496392",
     },
 ];
+    yield delay(1000)
+    yield put(setOrders(json))
+}
 
-export const FETCH_ORDERS = 'FETCH_USERS';
-export const FETCH_ORDERS_ERROR = 'FETCH_USERS_ERROR';
-export const FETCH_ORDERS_SUCCESS = 'FETCH_USERS_SUCCES';
-
-export const fetchOrders = () => {
-    return async (dispatch) => {
-        try {
-            dispatch({
-                type: FETCH_ORDERS
-            });
-            const response = await [...data]; //stub for future database queries
-            dispatch({
-                type: FETCH_ORDERS_SUCCESS,
-                payload: response
-            })
-
-        } catch (e) {
-            dispatch({
-                type: FETCH_ORDERS_ERROR,
-                payload: 'Error'
-            })
-        }
-    }
+export function* orderWatcher() {
+    yield takeEvery(FETCH_ORDERS, fetchOrderWorker)
 }
