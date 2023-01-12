@@ -1,7 +1,7 @@
 // @flow
 import * as React from "react";
 import { MapContainer, TileLayer } from "react-leaflet";
-import Routing from "./Routing";
+import { Routing } from "./Routing";
 
 export const Map = (props) => {
   return (
