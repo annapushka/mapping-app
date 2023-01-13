@@ -1,13 +1,9 @@
-import {put, takeEvery, call} from "redux-saga/effects"
+import {put, takeEvery} from "redux-saga/effects"
 import {FETCH_ORDERS, setOrders} from "../store/redusers/orderReduser";
 
 const delay = (ms) => new Promise(res => setTimeout(res, ms));
 
-// const fetchOrdersFromApi = () => fetch('https://...')
-
 function* fetchOrderWorker() {
-    // const data = yield call(fetchOrdersFromApi)
-    // const json = yield call(() => new Promise(res => res(data.json())))
     const json = [{
         key: "1",
         orderNumber: "№1",
