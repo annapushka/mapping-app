@@ -1,5 +1,3 @@
-In progress...
-
 # Mapping App
 
 React + Redux + Redux Saga + Leaflet + Leaflet routing machine
